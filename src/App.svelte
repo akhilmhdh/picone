@@ -1,6 +1,7 @@
 
 <script>
 	let name = 'picto'
+	import HomeLayout from './views/Home.svelte'
 </script>
 
-<h1>{name}: A concept working on ....</h1>
+<HomeLayout/>
