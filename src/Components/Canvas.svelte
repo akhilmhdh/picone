@@ -3,21 +3,28 @@
     import { onMount } from 'svelte';
     let img;
     let canvas;
-	let ctx;
+    let ctx;
     onMount(()=>{
         ctx = canvas.getContext('2d');
     })
     $:{
-        if(ctx && Image){
+        if($Images){
             const img = new Image();
-            img.src=$Images;
-            ctx.drawImage(img);
+            img.src = $Images;
+            const widthToHeight = img.width / img.height;
+            let newWidth = canvas.width;
+            let newHeight = newWidth / widthToHeight;
+            if (newHeight > canvas.height) {
+                newHeight = canvas.height;
+                newWidth = newHeight * wrh;
+            }
+            ctx.drawImage(img,0,0,newWidth,newHeight)
         }
     }
 </script>
 
 <canvas
 bind:this={canvas}
-width="200px"
-height="200px"
+width="500px"
+height="500px"
 />
