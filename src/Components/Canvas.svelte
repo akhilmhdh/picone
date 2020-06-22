@@ -1,9 +1,19 @@
 <script>
+    import {Images} from '../Store/Image.js' 
     import { onMount } from 'svelte';
+    let img;
     let canvas;
+	let ctx;
     onMount(()=>{
-        const ctx = canvas.getContext('2d');
+        ctx = canvas.getContext('2d');
     })
+    $:{
+        if(ctx && Image){
+            const img = new Image();
+            img.src=$Images;
+            ctx.drawImage(img);
+        }
+    }
 </script>
 
 <canvas
