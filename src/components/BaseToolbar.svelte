@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
     let files
     const loadFile = () => {
@@ -31,3 +32,6 @@
 <div>
     <input type="file" bind:files  accept="image/gif, image/jpeg, image/png" on:change={loadFile}/>
 </div>
+=======
+
+>>>>>>> 24d2f275afbb7b10e1e61f24d9a4d9ab79b47efc
