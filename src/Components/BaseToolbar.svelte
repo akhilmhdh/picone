@@ -10,7 +10,9 @@
         reader.addEventListener("load", function () {
         // convert image file to base64 string
         preview.src = reader.result;
-        Images.set(reader.result)
+        preview.onload = () =>{
+            Images.set(reader.result)
+        }
         }, false);
 
         if (file) {
