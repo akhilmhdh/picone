@@ -23,7 +23,7 @@ export default class ImageFormater {
         })
     }
 
-    virtualCanvas(image,height=500,width=500){
+    virtualCanvas(image,height=128,width=128){
         const scale = Math.min(width / image.getWidth(), height / image.getHeight())
         const x =  (width / 2) - (image.getWidth() / 2) * scale;
         const y = (height / 2) - (image.getHeight() / 2) * scale;
