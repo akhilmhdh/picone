@@ -32,7 +32,7 @@
     const handleClick = () =>{
         BPM = setInterval(()=>{
                     tone.playChord(chords[cursor])
-                    cursor > chords.length?clearInterval(BPM):cursor+=1
+                    cursor >= chords.length? clearInterval(BPM) :cursor+=1
                 },200)
     }
 </script>

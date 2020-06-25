@@ -1,6 +1,6 @@
 import * as Tone from "tone";
 
-const keys = ["C_1", "C#_1", "D_1", "D#_1", "E_1", "F_1", "F#_1", "G_1", "G#_1", "A_1", "A#_1", "B_1",
+const keys = ["C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0",
         "C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A#0", "B0",
         "C1", "C#1", "D1", "D#1", "E1", "F1", "F#1", "G1", "G#1", "A1", "A#1", "B1",
         "C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2",
@@ -30,16 +30,17 @@ export default class Music{
 
     parseChords(image){
         this.chords=[]
-        for(var y=0; y<image.getHeight(); y++){
+        for(var x=0; x<image.getWidth(); x++){
             let chord = [] 
-            for(var x=0; x<image.getWidth(); x++){
+            for(var y=image.getHeight()-1; y>=0; y--){
                 var red		= image.getIntComponent0(x,y);
                 if(red !== 255){
-                    chord.push(keys[x])
+                    chord.push(keys[128-y])
                 }
             }
             this.chords.push(chord)
         }
+        console.log(this.chords)
         return this.chords
     }
 

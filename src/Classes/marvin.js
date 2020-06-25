@@ -16,7 +16,7 @@ export default class ImageFormater {
             // Invert color
             Marvin.invertColors(imageOut, imageOut);
             // Threshold
-            Marvin.thresholding(imageOut, imageOut, 220);
+            Marvin.thresholding(imageOut, imageOut, 150);
             Marvin.scale(imageOut,imageScaled,this.image.getWidth() * scale, this.image.getHeight() * scale)
             imageScaled.draw(canvas,x,y);
             callback(this.virtualCanvas(imageOut))
@@ -24,11 +24,8 @@ export default class ImageFormater {
     }
 
     virtualCanvas(image,height=128,width=128){
-        const scale = Math.min(width / image.getWidth(), height / image.getHeight())
-        const x =  (width / 2) - (image.getWidth() / 2) * scale;
-        const y = (height / 2) - (image.getHeight() / 2) * scale;
         const vritualImage = new MarvinImage();
-        Marvin.scale(image.clone(),vritualImage,image.getWidth() * scale, image.getHeight() * scale)
+        Marvin.scale(image.clone(),vritualImage,width,height)
         return vritualImage
     }
 }
