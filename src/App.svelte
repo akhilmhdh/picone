@@ -9,7 +9,14 @@
 		overflow: hidden;
 		margin: 0;
 		padding: 0;
+		background-color: #eeeeee;
+		width: 100vw;
+		height: 100vh;
 	}
 </style>
+
+<svelte:head>
+	<link href="/fonts/harabara/index.css" rel="stylesheet">
+</svelte:head>
 
 <HomeLayout/>

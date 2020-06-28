@@ -5,8 +5,16 @@
     import Cropper from "../Components/Cropper.svelte"
 </script>
 
+<style>
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
 <Header/>
-<Canvas/>
-<Cropper/>
+<div>
+    <Canvas/>
+    <Cropper/>
+</div>
 <BaseToolbar/>
-<h2>A concept under way</h2>
