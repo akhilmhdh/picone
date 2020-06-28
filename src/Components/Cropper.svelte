@@ -6,13 +6,20 @@
     let zoom = 1;
 </script>
 
-{#if $Images.upload}
-        <div>
-            <Cropper
-            image={$Images.upload}
-            bind:crop
-            bind:zoom
-            on:cropcomplete={e => console.log(e.detail)}
-            />
-        </div>
-{/if}
+<style>
+    .container{
+        flex: 1;
+        position: relative;
+    }
+</style>
+
+<div class="container">
+    {#if $Images.upload}
+        <Cropper
+        image={$Images.upload}
+        bind:crop
+        bind:zoom
+        on:cropcomplete={e => console.log(e.detail)}
+        />
+    {/if}
+</div>

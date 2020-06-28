@@ -14,7 +14,9 @@
 
     onMount(()=>{
         tone.init()
-        ctx = canvas.getContext('2d');
+        ctx = canvas.getContext('2d'); 
+        canvas.style.width ='100%';
+        canvas.style.height='100%';
     })
     
     // $:{
@@ -37,10 +39,17 @@
     }
 </script>
 
-<canvas
-bind:this={canvas}
-width="500px"
-height="500px"
-/>
+<style>
+    .container{
+        flex: 1;
+    }
+</style>
 
-<button on:click|once={handleClick}>Starte</button>
+<div class="container">
+    <canvas
+    bind:this={canvas}
+    />
+</div>
+
+
+<!-- <button on:click|once={handleClick}>Starte</button> -->
