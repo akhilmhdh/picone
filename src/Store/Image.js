@@ -1,10 +1,11 @@
 import { writable } from 'svelte/store';
 
 const CreateImageStore = () =>{
-    const { subscribe, set, update } = writable(null);
+    const { subscribe, set, update } = writable({upload:null,musical:null});
     return {
         subscribe,
-        set:(image) => set(image)
+        setUpload: (image) => update(state => ({...state,upload:image})),
+        setMusical: (image) => update(state => ({...state,musical:image}))
     }
 }
 

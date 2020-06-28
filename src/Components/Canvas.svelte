@@ -17,17 +17,17 @@
         ctx = canvas.getContext('2d');
     })
     
-    $:{
-        if($Images){
-            const image = new ImageFormator()
-            const getImage = (image) => {
-                image.draw(canvas)
-                chords = tone.parseChords(image)
-            }
-            image.getCornerDetection($Images,canvas,getImage)
+    // $:{
+    //     if($Images){
+    //         const image = new ImageFormator()
+    //         const getImage = (image) => {
+    //             image.draw(canvas)
+    //             chords = tone.parseChords(image)
+    //         }
+    //         image.getCornerDetection($Images,canvas,getImage)
             
-        }
-    }
+    //     }
+    // }
     
     const handleClick = () =>{
         BPM = setInterval(()=>{
