@@ -17,6 +17,7 @@
 
 <svelte:head>
 	<link href="/fonts/harabara/index.css" rel="stylesheet">
+	<link href="/fonts/poppins/index.css" rel="stylesheet">
 </svelte:head>
 
 <HomeLayout/>

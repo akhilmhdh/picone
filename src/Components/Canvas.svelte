@@ -17,19 +17,22 @@
         ctx = canvas.getContext('2d'); 
         canvas.style.width ='100%';
         canvas.style.height='100%';
+        // ...then set the internal size to match
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
     })
     
-    // $:{
-    //     if($Images){
-    //         const image = new ImageFormator()
-    //         const getImage = (image) => {
-    //             image.draw(canvas)
-    //             chords = tone.parseChords(image)
-    //         }
-    //         image.getCornerDetection($Images,canvas,getImage)
-            
-    //     }
-    // }
+    $:{
+        if($Images.musical){
+            const image = new ImageFormator($Images.musical)
+            const getImage = (image) => {
+                image.draw(canvas)
+                console.log(image.getWidth(),image.getHeight())
+                chords = tone.parseChords(image)
+            }
+            image.getCornerDetection(canvas,getImage)
+        }
+    }
     
     const handleClick = () =>{
         BPM = setInterval(()=>{

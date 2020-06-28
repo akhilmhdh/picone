@@ -1,12 +1,12 @@
 export default class ImageFormater {
-    constructor(){
-        this.image =  new MarvinImage();
+    constructor(image){
+        this.image = image
     }
 
-    getCornerDetection(image,canvas,callback){
-        this.image.load(image,() => {
+    getCornerDetection(canvas,callback){
             const imageScaled = new MarvinImage();
             var imageOut = new MarvinImage(this.image.getWidth(), this.image.getHeight());
+            
             const scale = Math.min(canvas.width / this.image.getWidth(), canvas.height / this.image.getHeight())
             const x =  (canvas.width / 2) - (this.image.getWidth() / 2) * scale;
             const y = (canvas.height / 2) - (this.image.getHeight() / 2) * scale;
@@ -18,9 +18,9 @@ export default class ImageFormater {
             // Threshold
             Marvin.thresholding(imageOut, imageOut, 200);
             Marvin.scale(imageOut,imageScaled,this.image.getWidth() * scale, this.image.getHeight() * scale)
+            
             imageScaled.draw(canvas,x,y);
             callback(this.virtualCanvas(imageOut))
-        })
     }
 
     virtualCanvas(image,height=256,width=256){
