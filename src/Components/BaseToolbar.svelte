@@ -1,18 +1,18 @@
 <script>
     import {Images} from '../Store/Image.js'
+    import Cropper from 'svelte-easy-crop'
     
     let files
+    let crop = { x: 0, y: 0 }
+    let zoom = 1
     const loadFile = () => {
-        const preview = document.querySelector('img');
         const file = document.querySelector('input[type=file]').files[0];
         const reader = new FileReader();
 
         reader.addEventListener("load", function () {
         // convert image file to base64 string
-        preview.src = reader.result;
-        preview.onload = () =>{
-            Images.set(reader.result)
-        }
+        Images.set(reader.result)
+
         }, false);
 
         if (file) {
@@ -28,9 +28,14 @@
 </style>
 
 {#if files && files[0]}
-	<div>
-		<img src="" alt="Image preview..." id="output">
-    </div>
+        <div>
+            <Cropper
+            image={$Images}
+            bind:crop
+            bind:zoom
+            on:cropcomplete={e => console.log(e.detail)}
+            />
+        </div>
 {/if}
 
 <div>
