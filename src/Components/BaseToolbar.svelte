@@ -1,18 +1,14 @@
 <script>
-    import {Images} from '../Store/Image.js'
+    import {Player} from '../Store/Player.js'
 
-    let files
-    
-    const loadFile = () => {
-        const reader = new FileReader();
-        reader.addEventListener("load", function () {
-        // convert image file to base64 string
-            Images.setUpload(reader.result)
-        }, false);
+    let BPM = 80
 
-        if (files[0]) {
-            reader.readAsDataURL(files[0]);
-        }
+    const handleBPM = (evt) => {
+        Player.changeBPM(evt.target.value)
+    }
+
+    const handleState = () => {
+        Player.toggle()
     }
 </script>
 
@@ -21,7 +17,6 @@
         height: 48px;
         width: 100%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         padding: 0.5rem 1rem;
         background-color:#393e46
@@ -29,5 +24,13 @@
 </style>
 
 <div class="container">
-    <input type="file" bind:files  accept="image/gif, image/jpeg, image/png" on:change={loadFile}/>
+    <input type="range" min="30" max="180" value={$Player.BPM} class="slider" on:click={handleBPM}>
+    <button on:click={handleState}>
+        {#if $Player.state}
+            ||
+        {:else}
+            >
+        {/if}
+    </button>
+    {$Player.BPM}
 </div>

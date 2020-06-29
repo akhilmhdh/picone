@@ -16,7 +16,7 @@ export default class ImageFormater {
             // Invert color
             Marvin.invertColors(imageOut, imageOut);
             // Threshold
-            Marvin.thresholding(imageOut, imageOut, 200);
+            Marvin.thresholding(imageOut, imageOut, 180);
             Marvin.scale(imageOut,imageScaled,this.image.getWidth() * scale, this.image.getHeight() * scale)
             
             imageScaled.draw(canvas,x,y);

@@ -6,6 +6,7 @@ const CreatePlayerStore = () =>{
         subscribe,
         play:() => update(config => ({...config,state:true})),
         stop:() => update(config => ({...config,state:false})),
+        toggle:() => update(config => ({...config,state:!config.state})),
         changeBPM:(val) => update(config => ({...config,BPM:val})),
     }
 }
