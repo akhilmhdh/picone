@@ -15,6 +15,9 @@
     .main {
         display: flex;
         flex: 1;
+        position: relative;
+        align-items: center;
+        justify-content: center;
     }
 </style>
 

@@ -44,7 +44,10 @@
 
 <style>
     .container{
-        flex: 1;
+        width: 75vh;
+        height: 75vh;
+        max-width: 600px;
+        max-height: 600px;
     }
 </style>
 
