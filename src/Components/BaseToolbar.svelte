@@ -1,7 +1,6 @@
 <script>
     import {Player} from '../Store/Player.js'
-
-    let BPM = 80
+    import {Images} from '../Store/Image.js'
 
     const handleBPM = (evt) => {
         Player.changeBPM(evt.target.value)
@@ -9,6 +8,10 @@
 
     const handleState = () => {
         Player.toggle()
+    }
+
+    const handleThreshold = (evt) => {
+        Images.setThreshold(evt.target.value)
     }
 </script>
 
@@ -32,5 +35,6 @@
             >
         {/if}
     </button>
-    {$Player.BPM}
+    <input type="range" min="50" max="225" value={$Images.threshold} class="slider" on:click={handleThreshold}>
+    {$Images.threshold}
 </div>

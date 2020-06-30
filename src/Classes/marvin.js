@@ -3,7 +3,7 @@ export default class ImageFormater {
         this.image = image
     }
 
-    getCornerDetection(canvas,callback){
+    getCornerDetection(canvas,callback,threshold){
             const imageScaled = new MarvinImage();
             var imageOut = new MarvinImage(this.image.getWidth(), this.image.getHeight());
             
@@ -16,7 +16,7 @@ export default class ImageFormater {
             // Invert color
             Marvin.invertColors(imageOut, imageOut);
             // Threshold
-            Marvin.thresholding(imageOut, imageOut, 180);
+            Marvin.thresholding(imageOut, imageOut, threshold);
             Marvin.scale(imageOut,imageScaled,this.image.getWidth() * scale, this.image.getHeight() * scale)
             
             imageScaled.draw(canvas,x,y);

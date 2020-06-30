@@ -30,7 +30,7 @@
                 console.log(image.getWidth(),image.getHeight())
                 chords = tone.parseChords(image)
             }
-            image.getCornerDetection(canvas,getImage)
+            image.getCornerDetection(canvas,getImage,$Images.threshold)
         }
     }
     
