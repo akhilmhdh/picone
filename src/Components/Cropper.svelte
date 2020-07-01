@@ -14,9 +14,8 @@
         const uploadedImage = new MarvinImage()
         uploadedImage.load($Images.upload,function(){
             const croppedImage = uploadedImage.clone()
-            const {left,top,height,width}= cropper.getCropBoxData()
-            console.log(left,top,height,width)
-            Marvin.crop(uploadedImage,croppedImage,Math.round(left),Math.round(top),Math.round(width),Math.round(height));
+            const {x,y,height,width}= cropper.getData([true])
+            Marvin.crop(uploadedImage,croppedImage,x,y,width,height);
             Images.setMusical(croppedImage) 
         })
     } 
