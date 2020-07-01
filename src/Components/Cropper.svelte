@@ -8,35 +8,36 @@
     let files;
     let visible = true;
     let image;
+    let cropper = null
 
-    const cropImage = ({x,y,height,width}) =>{
+    const cropImage = () =>{
         const uploadedImage = new MarvinImage()
         uploadedImage.load($Images.upload,function(){
             const croppedImage = uploadedImage.clone()
-            Marvin.crop(uploadedImage,croppedImage,x,y,width,height);
-            Images.setMusical(croppedImage)
+            const {left,top,height,width}= cropper.getCropBoxData()
+            Marvin.crop(uploadedImage,croppedImage,left,top,width,height);
+            Images.setMusical(croppedImage) 
         })
     } 
+
+    const getCropper = (img) => { 
+        if(img){
+            image.onload = () => {
+                    cropper = new Cropper(image, {
+                    initialAspectRatio: 1 / 1,
+                    viewMode:1
+                    });
+                }
+        }
+    }
+
+    $: getCropper($Images.upload)
 
     const loadFile = () => {
         const reader = new FileReader();
         reader.addEventListener("load", function () {
             // convert image file to base64 string
-            image.src = reader.result
-
-            const cropper = new Cropper(image, {
-            initialAspectRatio: 1 / 1,
-            viewMode:1,
-            crop(event) {
-                console.log(event.detail.x);
-                console.log(event.detail.y);
-                console.log(event.detail.width);
-                console.log(event.detail.height);
-                console.log(event.detail.rotate);
-                console.log(event.detail.scaleX);
-                console.log(event.detail.scaleY);
-            },
-            });
+            Images.setUpload(reader.result)
         }, false);
 
         if (files[0]) {
@@ -51,15 +52,14 @@
 </script>
 
 <div class="container" class:visible>
-    <!-- {#if $Images.upload} -->
-        <img id="image" bind:this={image} alt="uploaded image">
-    <!-- {:else}
-        <div class="backdrop"/> -->
-    <!-- {/if} -->
+        <img id="image" bind:this={image} src={$Images.upload}>
+    {#if !$Images.upload}
+        <div class="backdrop"/> 
+    {/if} 
     <div class="btnContainer">
         {#if visible}
             <div>
-                <button on:click={()=>{cropImage(croppedDetails)}}>
+                <button on:click={()=>{cropImage()}}>
                     Crop
                 </button>
             </div>
