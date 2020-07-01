@@ -1,12 +1,13 @@
 <script>
-    import Cropper from 'svelte-easy-crop'
     import {Images} from '../Store/Image.js'
+    import Cropper from 'cropperjs';
 
     let crop = { x: 0, y: 0 };
     let zoom = 1;
     let croppedDetails = null;
     let files;
     let visible = true;
+    let image;
 
     const cropImage = ({x,y,height,width}) =>{
         const uploadedImage = new MarvinImage()
@@ -15,13 +16,27 @@
             Marvin.crop(uploadedImage,croppedImage,x,y,width,height);
             Images.setMusical(croppedImage)
         })
-    }
+    } 
 
     const loadFile = () => {
         const reader = new FileReader();
         reader.addEventListener("load", function () {
-        // convert image file to base64 string
-            Images.setUpload(reader.result)
+            // convert image file to base64 string
+            image.src = reader.result
+
+            const cropper = new Cropper(image, {
+            initialAspectRatio: 1 / 1,
+            viewMode:1,
+            crop(event) {
+                console.log(event.detail.x);
+                console.log(event.detail.y);
+                console.log(event.detail.width);
+                console.log(event.detail.height);
+                console.log(event.detail.rotate);
+                console.log(event.detail.scaleX);
+                console.log(event.detail.scaleY);
+            },
+            });
         }, false);
 
         if (files[0]) {
@@ -36,16 +51,11 @@
 </script>
 
 <div class="container" class:visible>
-    {#if $Images.upload}
-        <Cropper
-        image={$Images.upload}
-        bind:crop
-        bind:zoom
-        on:cropcomplete={e => {croppedDetails = e.detail.pixels}}
-        />
-    {:else}
-        <div class="backdrop"/>
-    {/if}
+    <!-- {#if $Images.upload} -->
+        <img id="image" bind:this={image} alt="uploaded image">
+    <!-- {:else}
+        <div class="backdrop"/> -->
+    <!-- {/if} -->
     <div class="btnContainer">
         {#if visible}
             <div>
@@ -81,6 +91,10 @@
     }
     .visible{
         width: 50vw;
+    }
+    img {
+    max-width: 100%;
+    display: block; /* This rule is very important, please don't ignore this */
     }
     .btnContainer{
         position: absolute;
