@@ -18,7 +18,6 @@
   "dependencies": {
     "cropperjs": "^1.5.7",
     "sirv-cli": "^0.4.4",
-    "svelte-easy-crop": "^1.0.3",
     "tone": "^13.8.25"
   }
 }

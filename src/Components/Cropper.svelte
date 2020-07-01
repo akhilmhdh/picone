@@ -15,12 +15,13 @@
         uploadedImage.load($Images.upload,function(){
             const croppedImage = uploadedImage.clone()
             const {left,top,height,width}= cropper.getCropBoxData()
-            Marvin.crop(uploadedImage,croppedImage,left,top,width,height);
+            console.log(left,top,height,width)
+            Marvin.crop(uploadedImage,croppedImage,Math.round(left),Math.round(top),Math.round(width),Math.round(height));
             Images.setMusical(croppedImage) 
         })
     } 
 
-    const getCropper = (img) => { 
+    const getCropper = (img) => {
         if(img){
             image.onload = () => {
                     cropper = new Cropper(image, {
@@ -37,6 +38,9 @@
         const reader = new FileReader();
         reader.addEventListener("load", function () {
             // convert image file to base64 string
+            if(cropper){
+                cropper.destroy();
+            }
             Images.setUpload(reader.result)
         }, false);
 
