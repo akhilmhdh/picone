@@ -35,12 +35,27 @@
         }
     }
     
-    const handleClick = () =>{
-        BPM = setInterval(()=>{
+    const handlePlayer = (state) =>{
+        if(state){
+            BPM = setInterval(()=>{
                     tone.playChord(chords[cursor])
-                    cursor >= chords.length? clearInterval(BPM) :cursor+=1
-                },200)
+                    if(cursor >= chords.length){ 
+                        clearInterval(BPM);
+                        Player.stop();
+                        cursor = 0;
+                    }
+                    else{
+                        cursor+=1
+                    }
+                },
+                60 * 1000 / $Player.BPM)
+        }
+        else{
+            clearInterval(BPM)
+        }
     }
+
+    $: handlePlayer($Player.state)
     
 </script>
 

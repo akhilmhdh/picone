@@ -27,7 +27,7 @@
 </style>
 
 <div class="container">
-    <input type="range" min="30" max="180" value={$Player.BPM} class="slider" on:click={handleBPM}>
+    <input type="range" min="30" max="350" value={$Player.BPM} class="slider" on:click={handleBPM}>
     <button on:click={handleState}>
         {#if $Player.state}
             ||

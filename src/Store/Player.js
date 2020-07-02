@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 const CreatePlayerStore = () =>{
-    const { subscribe, set, update } = writable({state:false,BPM:80});
+    const { subscribe, set, update } = writable({state:false,BPM:180});
     return {
         subscribe,
         play:() => update(config => ({...config,state:true})),
