@@ -1,5 +1,7 @@
 <script>
     import {Images} from '../Store/Image.js'
+    import {Player} from "../Store/Player.js"
+
     import ImageFormator from "../Classes/marvin.js"
     import Tone from "../Classes/tone.js"
 
@@ -27,7 +29,6 @@
             const image = new ImageFormator($Images.musical)
             const getImage = (image) => {
                 image.draw(canvas)
-                console.log(image.getWidth(),image.getHeight())
                 chords = tone.parseChords(image)
             }
             image.getCornerDetection(canvas,getImage,$Images.threshold)
@@ -40,6 +41,7 @@
                     cursor >= chords.length? clearInterval(BPM) :cursor+=1
                 },200)
     }
+    
 </script>
 
 <style>

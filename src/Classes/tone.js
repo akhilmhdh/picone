@@ -30,15 +30,12 @@ export default class Music{
 
     parseChords(image){
         this.chords=[]
-        for(var x=0; x<image.getWidth(); x=x+2){
+        for(var x=0; x<image.getWidth(); x++){
             let chord = [] 
-            for(var y=image.getHeight()-1; y>=0; y=y-2){
-                var redAlpha = image.getIntComponent0(x,y);
-                var redBeta = image.getIntComponent0(x+1,y+1)
-                var redGamma = image.getIntComponent0(x,y+1)
-                var redOmega = image.getIntComponent0(x+1,y)
-                if(redAlpha + redBeta + redGamma + redOmega !== 1020){
-                    chord.push(keys[128-Math.floor(y/2)])
+            for(var y=image.getHeight()-1; y>=0; y--){
+                var red = image.getIntComponent0(x,y);
+                if(red !== 255){
+                    chord.push(keys[128-y])
                 }
             }
             this.chords.push(chord)

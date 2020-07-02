@@ -23,7 +23,7 @@ export default class ImageFormater {
             callback(this.virtualCanvas(imageOut))
     }
 
-    virtualCanvas(image,height=256,width=256){
+    virtualCanvas(image,height=128,width=128){
         const vritualImage = new MarvinImage();
         Marvin.scale(image.clone(),vritualImage,width,height)
         return vritualImage
