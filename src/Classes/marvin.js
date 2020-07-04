@@ -19,10 +19,10 @@ export default class ImageFormater {
             Marvin.thresholding(imageOut, imageOut, threshold);
             Marvin.scale(imageOut, imageScaled, Math.round(this.image.getWidth() * scale), Math.round(this.image.getHeight() * scale));
             imageScaled.draw(canvas,x,y);
-            callback(this.virtualCanvas(imageOut))
+            callback(this.virtualCanvas(imageOut,imageScaled.getWidth()))
     }
 
-    virtualCanvas(image,height=128,width=128){
+    virtualCanvas(image,width,height=128){
         const vritualImage = new MarvinImage();
         Marvin.scale(image.clone(),vritualImage,width,height)
         return vritualImage
