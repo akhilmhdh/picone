@@ -10,9 +10,9 @@
     let image;
     let cropper = null
 
-    const cropImage = () =>{
+    const cropImage = () => {
         const uploadedImage = new MarvinImage()
-        uploadedImage.load($Images.upload,function(){
+        uploadedImage.load($Images.upload, function(){
             const croppedImage = uploadedImage.clone()
             const {x,y,height,width}= cropper.getData([true])
             Marvin.crop(uploadedImage,croppedImage,x,y,width,height);

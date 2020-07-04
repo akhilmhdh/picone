@@ -28,9 +28,9 @@
         if($Images.musical){
             const image = new ImageFormator($Images.musical)
             const getImage = (image) => {
-                image.draw(canvas)
                 chords = tone.parseChords(image)
             }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             image.getCornerDetection(canvas,getImage,$Images.threshold)
         }
     }
