@@ -17,6 +17,7 @@
     onMount(()=>{
         tone.init()
         ctx = canvas.getContext('2d'); 
+        ctx.strokeStyle="green";
         canvas.style.width ='100%';
         canvas.style.height='100%';
         // ...then set the internal size to match
@@ -38,6 +39,9 @@
     const handlePlayer = (state) =>{
         if(state){
             BPM = setInterval(()=>{
+                    ctx.moveTo(cursor,0);
+                    ctx.lineTo(cursor,canvas.height);
+                    ctx.stroke();
                     tone.playChord(chords[cursor])
                     if(cursor >= chords.length){ 
                         clearInterval(BPM);
