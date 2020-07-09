@@ -12,6 +12,7 @@
     let chords;
     let cursor = 0;
     let BPM;
+    let prevState;
     const tone = new Tone()
 
     onMount(()=>{
@@ -33,12 +34,14 @@
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             image.getCornerDetection(canvas,getImage,$Images.threshold)
+            prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
         }
     }
     
     const handlePlayer = (state) =>{
         if(state){
             BPM = setInterval(()=>{
+                    ctx.putImageData(prevState, 0, 0);
                     ctx.moveTo(cursor,0);
                     ctx.lineTo(cursor,canvas.height);
                     ctx.stroke();
