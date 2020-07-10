@@ -26,14 +26,14 @@ export default class ImageFormater {
             return imageScaled
     }
 
-    bw2color(image,canvas,rgb){
+    bw2color(image,canvas,foreground,background){
         const canvasImage = new MarvinImage(image.getWidth(), image.getHeight());
         for(let y=0; y<image.getHeight(); y++){
             for(let x=0; x<image.getWidth(); x++){
                const red = image.getIntComponent0(x,y);
-               if(red !== 255){
-                    canvasImage.setIntColor(x, y, rgb[0], rgb[1], rgb[2]);
-               }
+               red !== 255?
+                    canvasImage.setIntColor(x, y, foreground[0], foreground[1], foreground[2]):
+                    canvasImage.setIntColor(x, y, background[0], background[1], background[2])
           }
         } 
         canvasImage.draw(canvas)

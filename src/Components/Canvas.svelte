@@ -32,9 +32,10 @@
             const getImage = (image) => {
                 chords = tone.parseChords(image)
             }
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#393e46';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             const canvasImage = image.getCornerDetection(canvas,getImage,$Images.threshold)
-            image.bw2color(canvasImage,canvas,[50, 224, 196])
+            image.bw2color(canvasImage,canvas,[50, 224, 196],[57, 62, 70])
             prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
         }
     }
@@ -46,7 +47,7 @@
                     ctx.beginPath();
                     ctx.moveTo(cursor,0);
                     ctx.lineTo(cursor,canvas.height);
-                    ctx.strokeStyle = "blue";
+                    ctx.strokeStyle = "#32e0c4";
                     ctx.stroke();
 
                     tone.playChord(chords[cursor])
