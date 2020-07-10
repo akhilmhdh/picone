@@ -19,6 +19,7 @@
         tone.init()
         ctx = canvas.getContext('2d'); 
         ctx.strokeStyle="green";
+        ctx.fillStyle = 'white';
         canvas.style.width ='100%';
         canvas.style.height='100%';
         // ...then set the internal size to match
@@ -31,21 +32,24 @@
             const image = new ImageFormator($Images.musical)
             const getImage = (image) => {
                 chords = tone.parseChords(image)
+                prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             image.getCornerDetection(canvas,getImage,$Images.threshold)
-            prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
         }
     }
     
     const handlePlayer = (state) =>{
         if(state){
             BPM = setInterval(()=>{
-                    ctx.putImageData(prevState, 0, 0);
+                    ctx.putImageData(prevState,0,0);
+                    ctx.beginPath();
                     ctx.moveTo(cursor,0);
                     ctx.lineTo(cursor,canvas.height);
                     ctx.stroke();
+
                     tone.playChord(chords[cursor])
+                    
                     if(cursor >= chords.length){ 
                         clearInterval(BPM);
                         Player.stop();
