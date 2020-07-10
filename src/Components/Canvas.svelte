@@ -18,7 +18,7 @@
     onMount(()=>{
         tone.init()
         ctx = canvas.getContext('2d'); 
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = '#393e46';
         canvas.style.width ='100%';
         canvas.style.height='100%';
         // ...then set the internal size to match
@@ -31,10 +31,11 @@
             const image = new ImageFormator(image2tone)
             const getImage = (image) => {
                 chords = tone.parseChords(image)
-                prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            image.getCornerDetection(canvas,getImage,$Images.threshold)
+            const canvasImage = image.getCornerDetection(canvas,getImage,$Images.threshold)
+            image.bw2color(canvasImage,canvas,[50, 224, 196])
+            prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
         }
     }
     
