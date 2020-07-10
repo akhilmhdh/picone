@@ -18,7 +18,6 @@
     onMount(()=>{
         tone.init()
         ctx = canvas.getContext('2d'); 
-        ctx.strokeStyle="green";
         ctx.fillStyle = 'white';
         canvas.style.width ='100%';
         canvas.style.height='100%';
@@ -26,10 +25,10 @@
         canvas.width  = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     })
-    
-    $:{
-        if($Images.musical){
-            const image = new ImageFormator($Images.musical)
+
+    const image2tone = (image2tone) =>{
+        if(image2tone){
+            const image = new ImageFormator(image2tone)
             const getImage = (image) => {
                 chords = tone.parseChords(image)
                 prevState = ctx.getImageData(0,0,canvas.width,canvas.height);
@@ -46,10 +45,11 @@
                     ctx.beginPath();
                     ctx.moveTo(cursor,0);
                     ctx.lineTo(cursor,canvas.height);
+                    ctx.strokeStyle = "blue";
                     ctx.stroke();
 
                     tone.playChord(chords[cursor])
-                    
+
                     if(cursor >= chords.length){ 
                         clearInterval(BPM);
                         Player.stop();
@@ -66,6 +66,7 @@
         }
     }
 
+    $: image2tone($Images.musical)
     $: handlePlayer($Player.state)
     
 </script>
