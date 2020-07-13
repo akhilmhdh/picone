@@ -13,10 +13,6 @@
     const handleThreshold = (evt) => {
         Images.setThreshold(evt.target.value)
     }
-
-    const handleSelectChange = (val) => {
-        Player.changeDirection(val)
-    }
 </script>
 
 <style>
@@ -100,13 +96,5 @@
     <div>
         <label for="slider">{$Images.threshold}</label>
         <input type="range" min="50" max="225" value={$Images.threshold} id="slider" on:click={handleThreshold}>
-    </div>
-    <div>
-        <select value={$Player.direction} onchange={handleSelectChange}>
-            <option value="To Top ↑">To Top ↑</option>
-            <option value="To Right →" default>To Right →</option>
-            <option value="To Left ←">To Left ←</option>
-            <option value="To Bottom ↓">To Bottom ↓</option>
-        </select>
     </div>
 </div>
