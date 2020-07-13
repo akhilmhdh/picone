@@ -21,6 +21,7 @@
         width: 100%;
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         justify-content: space-around;
         padding: 0.5rem 1rem;
         background-color:#393e46
@@ -81,7 +82,7 @@
 
 <div class="container">
     <div>
-        <label for="slider">{$Player.BPM}</label>
+        <label for="slider">{$Player.BPM} BPM</label>
         <input type="range" min="30" max="350" value={$Player.BPM} id="slider" on:click={handleBPM}>
     </div>
     <div>
@@ -94,7 +95,7 @@
         </button>
     </div>
     <div>
-        <label for="slider">{$Images.threshold}</label>
+        <label for="slider">{$Images.threshold}%</label>
         <input type="range" min="50" max="225" value={$Images.threshold} id="slider" on:click={handleThreshold}>
     </div>
 </div>

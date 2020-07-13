@@ -95,6 +95,11 @@
     .visible{
         width: 50vw;
     }
+    @media screen and (max-width:720px) {
+        .visible{
+            width: 90vw;
+        }
+    }
     img {
     max-width: 100%;
     display: block; /* This rule is very important, please don't ignore this */
