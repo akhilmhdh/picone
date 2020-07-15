@@ -12,6 +12,8 @@ const keys = ["C0", "C#0", "D0", "D#0", "E0", "F0", "F#0", "G0", "G#0", "A0", "A
         "C8", "C#8", "D8", "D#8", "E8", "F8", "F#8", "G8", "G#8", "A8", "A#8", "B8",
         "C9", "C#9", "D9", "D#9", "E9", "F9", "F#9", "G9"]
 
+const dur = ["1m","2n","2t","4n","4t","8n","8t","16n","16t","32n","32t","64n","64t"]
+
 export default class Music{
     constructor(){
         this.chords = []
@@ -34,16 +36,19 @@ export default class Music{
         const width = image.getWidth()
 
         for(var x=0; x<width; x++){
-            let chord = new Set()
+            let chord = {}
+            let chordLength = 0
             for(var y=height-1; y>=0; y--){
                 var red = image.getIntComponent0(x,y);
                 if(red !== 255){
-                    chord.add(keys[128-Math.round((128 * y)/ height)])
+                    const value = keys[128-Math.round((128 * y)/ height)]
+                    value in chord?chord[value]+=1:chord[value]=1
+                    chordLength+=1
                 }
             }
-            this.chords.push([...chord])
+            this.chords.push({chordLength,chord})
         }
-        console.log(this.chords)
+        
         return this.chords
     }
 
@@ -51,6 +56,10 @@ export default class Music{
         if(!this.synth) {
 			await this.init();
         }
-        this.synth.triggerAttackRelease(chord,'16n')
+        for(const key in chord.chord){
+            this.chordLength>4?
+            this.synth.triggerAttackRelease([key],dur[Math.floor(chord.chord[key]/chord.chordLength)]):
+            this.synth.triggerAttackRelease([key],"4n")
+        }
     }
 }
